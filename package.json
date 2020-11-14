@@ -10,5 +10,8 @@
     "parcel",
     "eslint",
     "eslint-import-resolver"
-  ]
+  ],
+  "dependencies": {
+    "resolve": "^1.19.0"
+  }
 }
