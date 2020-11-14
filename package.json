@@ -1,0 +1,7 @@
+{
+  "name": "eslint-import-resolver-parcel2",
+  "version": "0.1",
+  "main": "src/index.js",
+  "author": "Simon Wiles <simonjwiles@gmail.com>",
+  "license": "MIT"
+}
