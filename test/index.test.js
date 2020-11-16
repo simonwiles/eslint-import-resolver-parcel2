@@ -1,4 +1,6 @@
+const fs = require("fs");
 const path = require("path");
+
 const importResolver = require("../src");
 
 describe("absolute paths", () => {
@@ -7,12 +9,15 @@ describe("absolute paths", () => {
     const source = "/test/test-file";
     const file = __filename;
 
-    const expected = {
-      found: true,
-      path: path.resolve(__dirname, "test-file.js"),
-    };
+    // temporarily create an empty file for the resolver to find
+    const targetPath = path.resolve(__dirname, "test-file.js");
+    fs.writeFileSync(targetPath, "");
 
+    const expected = { found: true, path: targetPath };
     const actual = importResolver.resolve(source, file);
+
+    // remove the created file
+    fs.unlinkSync(targetPath);
 
     expect(actual).toEqual(expected);
   });
@@ -22,12 +27,17 @@ describe("absolute paths", () => {
     const file = __filename;
     const config = { rootDir: "test" };
 
-    const expected = {
-      found: true,
-      path: path.resolve(__dirname, "test-folder/test-file.js"),
-    };
+    // temporarily create folder with an empty file for the resolver to find
+    const targetDir = path.resolve(__dirname, "test-folder");
+    const targetPath = path.resolve(targetDir, "test-file.js");
+    fs.mkdirSync(targetDir);
+    fs.writeFileSync(targetPath, "");
 
+    const expected = { found: true, path: targetPath };
     const actual = importResolver.resolve(source, file, config);
+
+    // remove the created folder
+    fs.rmdirSync(targetDir, { recursive: true });
 
     expect(actual).toEqual(expected);
   });
