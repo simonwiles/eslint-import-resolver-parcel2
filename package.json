@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "lint": "eslint src/index.js",
+    "test": "jest",
     "build": "pika build",
     "publish": "pika publish",
     "version": "pika build"
