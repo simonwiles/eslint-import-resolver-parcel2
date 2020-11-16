@@ -3,8 +3,10 @@ const path = require("path");
 
 const importResolver = require("../src");
 
+// https://v2.parceljs.org/features/module-resolution/#absolute-paths
+// "/foo resolves foo relative to the project root."
+
 describe("absolute paths", () => {
-  // https://v2.parceljs.org/features/module-resolution/#absolute-paths
   test("resolves /test/test-file.js successfully relative to automatically-discovered root directory", () => {
     const source = "/test/test-file";
     const file = __filename;
