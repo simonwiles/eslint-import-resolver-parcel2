@@ -15,7 +15,8 @@
     "eslint-import-resolver"
   ],
   "scripts": {
-    "lint": "eslint src/index.js"
+    "lint": "eslint src/index.js",
+    "build": "npx pika build"
   },
   "dependencies": {
     "resolve": "^1.19.0"
@@ -29,5 +30,15 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
     "prettier": "^2.1.2"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
   }
 }
