@@ -16,4 +16,19 @@ describe("absolute paths", () => {
 
     expect(actual).toEqual(expected);
   });
+
+  test("resolves /test-folder/test-file.js successfully relative to manually-specified root directory", () => {
+    const source = "/test-folder/test-file";
+    const file = __filename;
+    const config = { rootDir: "test" };
+
+    const expected = {
+      found: true,
+      path: path.resolve(__dirname, "test-folder/test-file.js"),
+    };
+
+    const actual = importResolver.resolve(source, file, config);
+
+    expect(actual).toEqual(expected);
+  });
 });
