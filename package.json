@@ -1,6 +1,6 @@
 {
   "name": "eslint-import-resolver-parcel2",
-  "version": "0.1",
+  "version": "0.1.1",
   "description": "Parcel 2 import resolution plugin for eslint-plugin-import.",
   "homepage": "https://github.com/simonwiles/eslint-import-resolver-parcel2",
   "bugs": "https://github.com/simonwiles/eslint-import-resolver-parcel2/issues",
@@ -15,16 +15,32 @@
     "eslint-import-resolver"
   ],
   "scripts": {
-    "lint": "eslint src/index.js"
+    "lint": "eslint src/index.js",
+    "build": "pika build",
+    "publish": "pika publish",
+    "version": "pika build"
   },
   "dependencies": {
     "resolve": "^1.19.0"
   },
   "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.9.2",
+    "@pika/plugin-standard-pkg": "^0.9.2",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
     "prettier": "^2.1.2"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ]
+    ]
   }
 }
