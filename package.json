@@ -16,5 +16,8 @@
   ],
   "dependencies": {
     "resolve": "^1.19.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2"
   }
 }
