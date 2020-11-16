@@ -17,6 +17,7 @@
   "scripts": {
     "lint": "eslint src/index.js test/",
     "test": "jest",
+    "coverage": "jest --coverage",
     "build": "pika build",
     "prepack": "pika build",
     "publish": "pika publish --any-branch",
