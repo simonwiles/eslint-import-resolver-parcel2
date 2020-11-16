@@ -67,3 +67,25 @@ describe("tilde paths relative to a nested node_modules dir", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("tilde paths relative to a manually-specified project root", () => {
+  test("resolves the rootDir first", () => {
+    const source = "~/test-file";
+    const file = __filename;
+    const config = { rootDir: "test/test-folder/" };
+
+    // temporarily create folder with an empty file for the resolver to find
+    const targetDir = path.resolve(__dirname, "test-folder");
+    const targetPath = path.resolve(targetDir, "test-file.js");
+    fs.mkdirSync(targetDir);
+    fs.writeFileSync(targetPath, "");
+
+    const expected = { found: true, path: targetPath };
+    const actual = importResolver.resolve(source, file, config);
+
+    // remove the created folder
+    fs.rmdirSync(targetDir, { recursive: true });
+
+    expect(actual).toEqual(expected);
+  });
+});
