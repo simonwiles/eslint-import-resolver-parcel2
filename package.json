@@ -14,10 +14,17 @@
     "eslint",
     "eslint-import-resolver"
   ],
+  "scripts": {
+    "lint": "eslint src/index.js"
+  },
   "dependencies": {
     "resolve": "^1.19.0"
   },
   "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
     "prettier": "^2.1.2"
   }
 }
