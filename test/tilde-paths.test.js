@@ -8,6 +8,27 @@ const importResolver = require("../src");
 //   package.json or the project root - whichever comes first."
 
 describe("tilde paths", () => {
+  test("resolves ~/package-level-test-file.js relative to package-level node_modules dir", () => {
+    const source = "~/package-level-test-file";
+    const file = __filename;
+
+    // temporarily create an empty file for the resolver to find
+    const targetPath = path.resolve(
+      __dirname,
+      "..",
+      "package-level-test-file.js",
+    );
+    fs.writeFileSync(targetPath, "");
+
+    const expected = { found: true, path: targetPath };
+    const actual = importResolver.resolve(source, file);
+
+    // remove the created file and folder
+    fs.unlinkSync(targetPath);
+
+    expect(actual).toEqual(expected);
+  });
+
   test("resolves ~/test-file.js relative to test/node_modules", () => {
     const source = "~/test-file";
     const file = __filename;
