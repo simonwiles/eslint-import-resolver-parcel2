@@ -7,28 +7,45 @@ const importResolver = require("../src");
 // "~/foo resolves foo relative to nearest node_modules directory, the nearest directory with
 //   package.json or the project root - whichever comes first."
 
-describe("tilde paths", () => {
-  test("resolves ~/package-level-test-file.js relative to package-level node_modules dir", () => {
-    const source = "~/package-level-test-file";
-    const file = __filename;
+describe("tilde paths relative to package-level node_modules dir", () => {
+  const source = "~/package-level-test-file";
 
+  const targetPath = path.resolve(
+    __dirname,
+    "..",
+    "package-level-test-file.js",
+  );
+
+  beforeAll(() => {
     // temporarily create an empty file for the resolver to find
-    const targetPath = path.resolve(
-      __dirname,
-      "..",
-      "package-level-test-file.js",
-    );
     fs.writeFileSync(targetPath, "");
+  });
+
+  afterAll(() => {
+    // remove the created file and folder
+    fs.unlinkSync(targetPath);
+  });
+
+  test("resolves ~/package-level-test-file.js", () => {
+    const file = __filename;
 
     const expected = { found: true, path: targetPath };
     const actual = importResolver.resolve(source, file);
 
-    // remove the created file and folder
-    fs.unlinkSync(targetPath);
-
     expect(actual).toEqual(expected);
   });
 
+  test("resolves ~/package-level-test-file.js from within test folder", () => {
+    const file = path.resolve(__dirname, "test-folder", "index.js");
+
+    const expected = { found: true, path: targetPath };
+    const actual = importResolver.resolve(source, file);
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("tilde paths relative to a nested node_modules dir", () => {
   test("resolves ~/test-file.js relative to test/node_modules", () => {
     const source = "~/test-file";
     const file = __filename;
