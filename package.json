@@ -45,5 +45,9 @@
         "@pika/plugin-build-node"
       ]
     ]
+  },
+  "alias": {
+    "folder-alias": "./test-folder",
+    "test-alias": "jest"
   }
 }
