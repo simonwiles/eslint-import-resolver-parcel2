@@ -1,5 +1,11 @@
 {
-  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["jest"],
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module"
