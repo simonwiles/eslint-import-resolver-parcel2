@@ -15,7 +15,7 @@
     "eslint-import-resolver"
   ],
   "scripts": {
-    "lint": "eslint src/index.js",
+    "lint": "eslint src/index.js test/",
     "test": "jest",
     "build": "pika build",
     "publish": "pika publish",
