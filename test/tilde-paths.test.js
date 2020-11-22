@@ -8,8 +8,6 @@ const importResolver = require("../src");
 //   package.json or the project root - whichever comes first."
 
 describe("tilde paths relative to package-level node_modules dir", () => {
-  const source = "~/package-level-test-file";
-
   const targetPath = path.resolve(
     __dirname,
     "..",
@@ -27,6 +25,7 @@ describe("tilde paths relative to package-level node_modules dir", () => {
   });
 
   test("resolves ~/package-level-test-file.js", () => {
+    const source = "~/package-level-test-file";
     const file = __filename;
 
     const expected = { found: true, path: targetPath };
@@ -36,6 +35,7 @@ describe("tilde paths relative to package-level node_modules dir", () => {
   });
 
   test("resolves ~/package-level-test-file.js from within test folder", () => {
+    const source = "~/package-level-test-file";
     const file = path.resolve(__dirname, "test-folder", "index.js");
 
     const expected = { found: true, path: targetPath };
