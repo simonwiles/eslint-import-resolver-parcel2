@@ -12,7 +12,7 @@ describe("imports without extensions", () => {
   });
 
   afterAll(() => {
-    // remove the created file and folder
+    // remove the created file
     fs.unlinkSync(targetPath);
   });
 
@@ -33,6 +33,25 @@ describe("imports without extensions", () => {
 
     const expected = { found: true, path: targetPath };
     const actual = importResolver.resolve(source, file, config);
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("imports with extensions", () => {
+  test("resolves a .vue file when specified with explicit extension", () => {
+    const source = "./vue-file.vue";
+    const file = __filename;
+
+    // temporarily create an empty file for the resolver to find
+    const targetPath = path.resolve(__dirname, "vue-file.vue");
+    fs.writeFileSync(targetPath, "");
+
+    const expected = { found: true, path: targetPath };
+    const actual = importResolver.resolve(source, file);
+
+    // remove the created file
+    fs.unlinkSync(targetPath);
 
     expect(actual).toEqual(expected);
   });
