@@ -1,3 +1,5 @@
+[![Tests](https://github.com/simonwiles/eslint-import-resolver-parcel2/workflows/Tests/badge.svg)](https://github.com/simonwiles/eslint-import-resolver-parcel2/actions?query=workflow%3ATests)
+
 # eslint-import-resolver-parcel2
 
 Parcel import resolution plugin for [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import). This allows `eslint/import` to work with [module resolution in Parcel 2](https://v2.parceljs.org/features/module-resolution/).
