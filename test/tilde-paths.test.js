@@ -74,7 +74,7 @@ describe("tilde paths relative to a manually-specified project root", () => {
   test("resolves giving precedence to a manually specified project root", () => {
     const source = "~/test-file";
     const file = __filename;
-    const config = { rootDir: "test/test-folder/" };
+    const config = { projectRoot: "test/test-folder/" };
 
     // temporarily a file with a matching name at the package level
     const decoyPath = path.resolve(__dirname, "test-file.js");

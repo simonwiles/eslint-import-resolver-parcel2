@@ -16,7 +16,7 @@ function findAliases() {
   return JSON.parse(packageJson).alias || {};
 }
 
-function resolvePackageLevel(source, file, rootDirectory) {
+function resolvePackageLevel(source, file, projectRoot) {
   let packageDirectory = path.dirname(file);
 
   for (;;) {
@@ -31,10 +31,8 @@ function resolvePackageLevel(source, file, rootDirectory) {
   }
 
   return path.join(
-    // return rootDirectory if it is nested inside the packageDirectory
-    rootDirectory.startsWith(packageDirectory)
-      ? rootDirectory
-      : packageDirectory,
+    // return projectRoot if it is nested inside the packageDirectory
+    projectRoot.startsWith(packageDirectory) ? projectRoot : packageDirectory,
     // Get rid of the tilde
     source.slice(1),
   );
@@ -43,7 +41,7 @@ function resolvePackageLevel(source, file, rootDirectory) {
 export function resolve(source, file, possibleConfig = {}) {
   if (isCore(source)) return { found: true, path: null };
 
-  const config = { rootDir: "", extensions: [], ...possibleConfig };
+  const config = { projectRoot: "", extensions: [], ...possibleConfig };
 
   const [startSource] = source.split("/");
   const aliases = findAliases();
@@ -53,7 +51,7 @@ export function resolve(source, file, possibleConfig = {}) {
 
   let newSource = source.replace(foundAlias, aliases[foundAlias]);
 
-  const rootDirectory = path.resolve(config.rootDir);
+  const projectRoot = path.resolve(config.projectRoot);
 
   switch (newSource[0]) {
     case ".":
@@ -61,11 +59,11 @@ export function resolve(source, file, possibleConfig = {}) {
       break;
 
     case "~":
-      newSource = resolvePackageLevel(newSource, file, rootDirectory);
+      newSource = resolvePackageLevel(newSource, file, projectRoot);
       break;
 
     case "/":
-      newSource = path.join(rootDirectory, newSource);
+      newSource = path.join(projectRoot, newSource);
       break;
 
     // no default
