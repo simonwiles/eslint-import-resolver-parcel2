@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+const { deleteFolderRecursive } = require("./utils");
+
 const importResolver = require("../src");
 
 // https://v2.parceljs.org/features/module-resolution/#aliases
@@ -33,7 +35,7 @@ describe("aliases", () => {
     const actual = importResolver.resolve(source, file);
 
     // remove the created folder
-    fs.rmdirSync(targetDir, { recursive: true });
+    deleteFolderRecursive(targetDir);
 
     expect(actual).toEqual(expected);
   });
