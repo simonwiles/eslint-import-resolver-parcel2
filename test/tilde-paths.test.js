@@ -71,10 +71,14 @@ describe("tilde paths relative to a nested node_modules dir", () => {
 });
 
 describe("tilde paths relative to a manually-specified project root", () => {
-  test("resolves the rootDir first", () => {
+  test("resolves giving precedence to a manually specified project root", () => {
     const source = "~/test-file";
     const file = __filename;
     const config = { rootDir: "test/test-folder/" };
+
+    // temporarily a file with a matching name at the package level
+    const decoyPath = path.resolve(__dirname, "test-file.js");
+    fs.writeFileSync(decoyPath, "");
 
     // temporarily create folder with an empty file for the resolver to find
     const targetDir = path.resolve(__dirname, "test-folder");
@@ -87,6 +91,7 @@ describe("tilde paths relative to a manually-specified project root", () => {
 
     // remove the created folder
     deleteFolderRecursive(targetDir);
+    fs.unlinkSync(decoyPath);
 
     expect(actual).toEqual(expected);
   });
