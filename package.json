@@ -18,6 +18,7 @@
     "lint": "eslint src/index.js test/",
     "test": "jest",
     "build": "pika build",
+    "prepublish": "yarn build",
     "publish": "pika publish",
     "version": "pika build"
   },
