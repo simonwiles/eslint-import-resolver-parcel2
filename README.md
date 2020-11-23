@@ -34,6 +34,8 @@ settings: {
 
 See the [Parcel 2 documentation](https://v2.parceljs.org/features/module-resolution/) for details on how Parcel resolves dependencies -- this plugin is intended to follow this specification.
 
+If migrating from Parcel 1 (`parceljs`), note that [Parcel 2 doesn't support glob file paths](https://github.com/parcel-bundler/parcel/issues/4683).
+
 #### A Note on Absolute Paths
 
 Absolute paths are resolved relative to the **project root**, which can depend on the entrypoint passed to Parcel. This plugin will use the folder where `eslint` is called from as the **project root** (which will be appropriate in most cases), but if you need to specify an alternative project root, you can do so in your eslint config:
