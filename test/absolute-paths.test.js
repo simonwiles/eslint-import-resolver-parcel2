@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+const { deleteFolderRecursive } = require("./utils");
+
 const importResolver = require("../src");
 
 // https://v2.parceljs.org/features/module-resolution/#absolute-paths
@@ -39,7 +41,7 @@ describe("absolute paths", () => {
     const actual = importResolver.resolve(source, file, config);
 
     // remove the created folder
-    fs.rmdirSync(targetDir, { recursive: true });
+    deleteFolderRecursive(targetDir);
 
     expect(actual).toEqual(expected);
   });
