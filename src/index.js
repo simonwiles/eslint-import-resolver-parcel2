@@ -2,7 +2,16 @@ import { posix as path } from "path";
 import fs from "fs";
 import { isCore, sync as resolveSync } from "resolve";
 
-const defaultExtensions = [".js", ".jsx"];
+const defaultExtensions = [
+  ".ts",
+  ".tsx",
+  ".js",
+  ".jsx",
+  ".json",
+  ".css",
+  ".styl",
+  ".vue",
+];
 export const interfaceVersion = 2;
 
 function findAliases() {
