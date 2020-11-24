@@ -19,7 +19,7 @@
     "test": "jest",
     "build": "pika build",
     "prepublish": "yarn build",
-    "publish": "pika publish",
+    "publish": "pika publish --any-branch",
     "version": "pika build"
   },
   "dependencies": {
