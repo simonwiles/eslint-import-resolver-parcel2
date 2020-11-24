@@ -1,5 +1,6 @@
 [![npm Version](https://img.shields.io/npm/v/eslint-import-resolver-parcel2?logo=npm)](https://www.npmjs.com/package/eslint-import-resolver-parcel2)
 [![Tests](https://github.com/simonwiles/eslint-import-resolver-parcel2/workflows/Tests/badge.svg)](https://github.com/simonwiles/eslint-import-resolver-parcel2/actions?query=workflow%3ATests)
+[![License](https://img.shields.io/github/license/simonwiles/eslint-import-resolver-parcel2)](https://github.com/simonwiles/eslint-import-resolver-parcel2/blob/main/LICENSE)
 
 # eslint-import-resolver-parcel2
 
