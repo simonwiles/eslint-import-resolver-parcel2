@@ -28,7 +28,7 @@ Add this to your eslint config:
 
 ```js
 settings: {
-  "import/resolver": "parcel"
+  "import/resolver": "parcel2"
 }
 ```
 
