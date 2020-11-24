@@ -38,7 +38,7 @@ If migrating from Parcel 1 (`parceljs`), note that [Parcel 2 doesn't support glo
 
 #### A Note on Absolute Paths
 
-Absolute paths are resolved relative to the **project root**, which can depend on the entrypoint passed to Parcel. This plugin will use the folder where `eslint` is called from as the **project root** (which will be appropriate in most cases), but if you need to specify an alternative project root, you can do so in your eslint config:
+Absolute paths are resolved relative to the **project root**, which can depend on the entrypoint passed to Parcel ([see here](https://v2.parceljs.org/features/module-resolution/)). This plugin will use the folder where `eslint` is called from as the **project root** (which will be appropriate in most cases), but if you need to specify an alternative project root, you can do so in your eslint config:
 
 ```js
 settings: {
