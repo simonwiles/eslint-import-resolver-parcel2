@@ -20,7 +20,7 @@
     "coverage": "jest --coverage",
     "build": "pika build",
     "prepack": "pika build",
-    "publish": "pika publish --any-branch",
+    "publish": "npm login && pika publish --any-branch",
     "version": "pika build"
   },
   "dependencies": {
