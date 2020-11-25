@@ -1,8 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const { deleteFolderRecursive } = require("./utils");
-
 const importResolver = require("../src");
 
 // https://v2.parceljs.org/features/module-resolution/#aliases
@@ -35,7 +33,32 @@ describe("aliases", () => {
     const actual = importResolver.resolve(source, file);
 
     // remove the created folder
-    deleteFolderRecursive(targetDir);
+    global.deleteFolderRecursive(targetDir);
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("finding aliases shouldn't hang if package.json isn't available", () => {
+  const packagePath = path.resolve(path.resolve(), "package.json");
+  const hiddenPackagePath = path.resolve(path.resolve(), "_package.json");
+
+  beforeAll(() => {
+    // hide package.json so that it can't be found by the findAliases function
+    fs.renameSync(packagePath, hiddenPackagePath);
+  });
+
+  afterAll(() => {
+    // restore package.json
+    fs.renameSync(hiddenPackagePath, packagePath);
+  });
+
+  test("resolution completes appropriately with no resolved aliases", () => {
+    const source = "test-alias";
+    const file = __filename;
+
+    const expected = { found: false };
+    const actual = importResolver.resolve(source, file);
 
     expect(actual).toEqual(expected);
   });

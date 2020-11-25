@@ -1,8 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const { deleteFolderRecursive } = require("./utils");
-
 const importResolver = require("../src");
 
 // https://v2.parceljs.org/features/module-resolution/#tilde-paths
@@ -90,8 +88,20 @@ describe("tilde paths relative to a manually-specified project root", () => {
     const actual = importResolver.resolve(source, file, config);
 
     // remove the created folder
-    deleteFolderRecursive(targetDir);
+    global.deleteFolderRecursive(targetDir);
     fs.unlinkSync(decoyPath);
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("tilde paths that can't be resolved return false", () => {
+  test("recursion terminates appropriately when reaching drive root if node_modules can't be found", () => {
+    const source = "~/no-such-file";
+    const file = path.resolve(__dirname, "..", "..", "index.js");
+
+    const expected = { found: false };
+    const actual = importResolver.resolve(source, file);
 
     expect(actual).toEqual(expected);
   });

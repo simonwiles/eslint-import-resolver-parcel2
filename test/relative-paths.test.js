@@ -1,8 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const { deleteFolderRecursive } = require("./utils");
-
 const importResolver = require("../src");
 
 describe("relative paths", () => {
@@ -37,7 +35,7 @@ describe("relative paths", () => {
     const actual = importResolver.resolve(source, file);
 
     // remove the created folder
-    deleteFolderRecursive(targetDir);
+    global.deleteFolderRecursive(targetDir);
 
     expect(actual).toEqual(expected);
   });
