@@ -66,6 +66,9 @@ export function resolve(source, file, possibleConfig = {}) {
 
   const projectRoot = path.resolve(config.projectRoot);
 
+  // this should probably strip off any named pipeline
+  newSource = newSource.split(/^[^:]+:/).pop();
+
   switch (newSource[0]) {
     case ".":
       newSource = path.resolve(path.dirname(file), newSource);
