@@ -39,7 +39,7 @@ describe("aliases", () => {
   });
 });
 
-describe("finding aliases shouldn't hang if package.json isn't available", () => {
+describe("when aliases are unavailable", () => {
   const packagePath = path.resolve(path.resolve(), "package.json");
   const hiddenPackagePath = path.resolve(path.resolve(), "_package.json");
 
@@ -53,7 +53,23 @@ describe("finding aliases shouldn't hang if package.json isn't available", () =>
     fs.renameSync(hiddenPackagePath, packagePath);
   });
 
-  test("resolution completes appropriately with no resolved aliases", () => {
+  test("resolution completes appropriately when package.json does not specify aliases", () => {
+    const source = "test-alias";
+    const file = __filename;
+
+    // temporarily create an empty package.json
+    fs.writeFileSync(packagePath, "{}");
+
+    const expected = { found: false };
+    const actual = importResolver.resolve(source, file);
+
+    // remove the empty package.json
+    fs.unlinkSync(packagePath);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("resolution completes appropriately when package.json is unavailable", () => {
     const source = "test-alias";
     const file = __filename;
 
