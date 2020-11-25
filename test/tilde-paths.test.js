@@ -94,3 +94,15 @@ describe("tilde paths relative to a manually-specified project root", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("tilde paths that can't be resolved return false", () => {
+  test("recursion terminates appropriately when reaching drive root if node_modules can't be found", () => {
+    const source = "~/no-such-file";
+    const file = path.resolve(__dirname, "..", "..", "index.js");
+
+    const expected = { found: false };
+    const actual = importResolver.resolve(source, file);
+
+    expect(actual).toEqual(expected);
+  });
+});
