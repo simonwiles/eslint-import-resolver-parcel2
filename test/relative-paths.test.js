@@ -1,8 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const { deleteFolderRecursive } = require("./utils");
-
 const importResolver = require("../src");
 
 describe("relative paths", () => {

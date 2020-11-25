@@ -15,5 +15,4 @@ const deleteFolderRecursive = (path) => {
   }
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { deleteFolderRecursive };
+global.deleteFolderRecursive = deleteFolderRecursive;
