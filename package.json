@@ -1,6 +1,6 @@
 {
   "name": "eslint-import-resolver-parcel2",
-  "version": "0.2.7",
+  "version": "1.0.0-0",
   "description": "Parcel 2 import resolution plugin for eslint-plugin-import.",
   "homepage": "https://github.com/simonwiles/eslint-import-resolver-parcel2",
   "bugs": "https://github.com/simonwiles/eslint-import-resolver-parcel2/issues",
