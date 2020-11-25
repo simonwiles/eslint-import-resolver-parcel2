@@ -33,7 +33,7 @@ describe("aliases", () => {
     const actual = importResolver.resolve(source, file);
 
     // remove the created folder
-    deleteFolderRecursive(targetDir);
+    global.deleteFolderRecursive(targetDir);
 
     expect(actual).toEqual(expected);
   });

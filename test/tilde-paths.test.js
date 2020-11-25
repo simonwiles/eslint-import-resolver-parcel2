@@ -88,7 +88,7 @@ describe("tilde paths relative to a manually-specified project root", () => {
     const actual = importResolver.resolve(source, file, config);
 
     // remove the created folder
-    deleteFolderRecursive(targetDir);
+    global.deleteFolderRecursive(targetDir);
     fs.unlinkSync(decoyPath);
 
     expect(actual).toEqual(expected);

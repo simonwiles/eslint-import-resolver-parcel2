@@ -39,7 +39,7 @@ describe("absolute paths", () => {
     const actual = importResolver.resolve(source, file, config);
 
     // remove the created folder
-    deleteFolderRecursive(targetDir);
+    global.deleteFolderRecursive(targetDir);
 
     expect(actual).toEqual(expected);
   });
