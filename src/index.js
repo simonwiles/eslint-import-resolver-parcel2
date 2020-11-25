@@ -18,6 +18,10 @@ function findAliases() {
   let currentPath = path.resolve();
   let packagePath = path.resolve(currentPath, "package.json");
   while (!fs.existsSync(packagePath)) {
+    if (path.parse(currentPath).root === currentPath) {
+      // reached the drive root; return an empty object
+      return {};
+    }
     currentPath = path.resolve(currentPath, "..");
     packagePath = path.resolve(currentPath, "package.json");
   }
