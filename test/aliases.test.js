@@ -38,3 +38,28 @@ describe("aliases", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("finding aliases shouldn't hang if package.json isn't available", () => {
+  const packagePath = path.resolve(path.resolve(), "package.json");
+  const hiddenPackagePath = path.resolve(path.resolve(), "_package.json");
+
+  beforeAll(() => {
+    // hide package.json so that it can't be found by the findAliases function
+    fs.renameSync(packagePath, hiddenPackagePath);
+  });
+
+  afterAll(() => {
+    // restore package.json
+    fs.renameSync(hiddenPackagePath, packagePath);
+  });
+
+  test("resolution completes appropriately with no resolved aliases", () => {
+    const source = "test-alias";
+    const file = __filename;
+
+    const expected = { found: false };
+    const actual = importResolver.resolve(source, file);
+
+    expect(actual).toEqual(expected);
+  });
+});
